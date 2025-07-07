@@ -683,4 +683,4 @@ app.get("/resend-code", (req, res) => {
 // =======================
 // Server
 // =======================
-module.exports = serverless(app);
+export const handler = serverless(app);
