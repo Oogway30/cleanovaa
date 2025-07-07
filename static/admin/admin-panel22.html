@@ -175,7 +175,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        fetch("http://cleanovaa.onrender.com/api/users")
+        fetch("http://cleanovaa.com/api/users")
           .then((response) => {
             if (!response.ok) {
               throw new Error(
@@ -239,7 +239,7 @@
 
       // Hard Delete: send DELETE request to backend 
       function hardDeleteUser(userId, btn) {
-        fetch(`http://cleanovaa.onrender.com/${userId}`, {
+        fetch(`http://cleanovaa.com/${userId}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -286,7 +286,7 @@
         const updatedGender = cells[3].querySelector("input").value;
         const updatedName = cells[4].querySelector("input").value;
         const updatedRole = cells[5].querySelector("input").value;
-        fetch(`http://cleanovaa.onrender.com/api/users/${userId}/${updatedEmail}/${updatedNumber}/${updatedGender}/${updatedName}/${updatedRole}`, {
+        fetch(`http://cleanovaa.com/api/users/${userId}/${updatedEmail}/${updatedNumber}/${updatedGender}/${updatedName}/${updatedRole}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
