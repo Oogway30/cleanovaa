@@ -684,4 +684,6 @@ app.get("/resend-code", (req, res) => {
 // =======================
 // Server
 // =======================
-module.exports = app;
+app.listen(port, () => {
+  console.log("App is listening on port", port);
+});
