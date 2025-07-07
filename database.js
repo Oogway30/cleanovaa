@@ -1,17 +1,17 @@
 require("dotenv").config();
 
-const mysql = require("mysql2");
+const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 
-const pool = mysql
-  .createPool({
-    host: "127.0.0.1",
-    user: "root",
-    password: "Goney1234",
-    database: "users",
-  })
-  .promise();
+// PostgreSQL connection pool
+const pool = new Pool({
+  host:   "localhost",
+  user:"postgres",
+  password:  "Prathamgone@123",
+  database:  "postgres",
+  port:  5432,
+});
 
 async function encrypt(password) {
   let hashedPassword = await bcrypt.hash(password, 10);
@@ -21,15 +21,14 @@ async function encrypt(password) {
 async function createUser(email, password, number, gender, name) {
   const hashedPassword = await bcrypt.hash(password, 10);
   await pool.query(
-    "INSERT INTO users (email, password, number, gender, name) VALUES (?, ?, ?, ?, ?)",
+    "INSERT INTO users (email, password, number, gender, name) VALUES ($1, $2, $3, $4, $5)",
     [email, hashedPassword, number, gender, name]
   );
 }
 
 async function CreateUserMessage(email, name, subject, message) {
-  // Check if this email already sent a message in the last 24 hours
-  const [rows] = await pool.query(
-    "SELECT * FROM user_message WHERE email = ? AND created_at >= NOW() - INTERVAL 1 DAY",
+  const { rows } = await pool.query(
+    "SELECT * FROM user_message WHERE email = $1 AND created_at >= NOW() - INTERVAL '1 day'",
     [email]
   );
 
@@ -37,9 +36,8 @@ async function CreateUserMessage(email, name, subject, message) {
     throw new Error("You can only send one message every 24 hours.");
   }
 
-  // Insert the new message
   await pool.query(
-    "INSERT INTO user_message (email, name, subject, message) VALUES (?, ?, ?, ?)",
+    "INSERT INTO user_message (email, name, subject, message) VALUES ($1, $2, $3, $4)",
     [email, name, subject, message]
   );
 
@@ -48,14 +46,12 @@ async function CreateUserMessage(email, name, subject, message) {
 
 async function checkUserAuthentication(email) {
   try {
-    const [result] = await pool.query("SELECT * FROM users WHERE email = ?", [
-      email,
-    ]);
-
-    if (result.length === 0) {
-      console.log("No user found.");
-      return "Invalid email or password.";
+    const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    if (rows.length === 0) {
+      // No user found, so email is available for registration
+      return "Available";
     }
+    // User exists, so email is already taken
     return "User exists.";
   } catch (err) {
     console.error("Error checking user:", err);
@@ -65,23 +61,21 @@ async function checkUserAuthentication(email) {
 
 async function checkUser(email, password) {
   try {
-    const [result] = await pool.query("SELECT * FROM users WHERE email = ?", [
-      email,
-    ]);
-
-    if (result.length === 0) {
+    const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    if (rows.length === 0) {
       console.log("No user found for email:", email);
       return "Invalid email or password.";
     }
 
-    const user = result[0];
+    const user = rows[0];
     console.log("User found:", user);
 
     const match = await bcrypt.compare(password, user.password);
     console.log("Password match for", email, ":", match);
 
     if (match) {
-      return user.role === "admin"
+      const userRole = user.role ? user.role.trim() : "";
+      return userRole === "admin"
         ? {
             email: user.email,
             name: user.name,
@@ -103,8 +97,8 @@ async function checkUser(email, password) {
 
 async function getAllUsers() {
   try {
-    const [result] = await pool.query("SELECT * FROM users");
-    return result;
+    const { rows } = await pool.query("SELECT * FROM users");
+    return rows;
   } catch {
     return "I am sorry an error occured :(";
   }
@@ -112,8 +106,8 @@ async function getAllUsers() {
 
 async function getAllMessages() {
   try {
-    const [result] = await pool.query("SELECT * FROM user_message");
-    return result;
+    const { rows } = await pool.query("SELECT * FROM user_message");
+    return rows;
   } catch {
     return "I am sorry an error occured :(";
   }
@@ -121,8 +115,8 @@ async function getAllMessages() {
 
 async function getAllUserswith(filter1) {
   try {
-    const result = await pool.query("SELECT * FROM users");
-    result.forEach((element) => {
+    const { rows } = await pool.query("SELECT * FROM users");
+    rows.forEach((element) => {
       console.log(element.filter1);
     });
   } catch {
@@ -132,8 +126,7 @@ async function getAllUserswith(filter1) {
 
 async function deleteUser(id) {
   try {
-    const user = id;
-    const query = await pool.query("DELETE FROM users WHERE id = ?", [user]);
+    await pool.query("DELETE FROM users WHERE id = $1", [id]);
     return "Successfully deleted!:)";
   } catch {
     return "Some Error Occurred Sorry";
@@ -142,7 +135,7 @@ async function deleteUser(id) {
 
 async function deleteUserMessage(id) {
   try {
-    const query = await pool.query("DELETE FROM user_message WHERE id = ?", [id]);
+    await pool.query("DELETE FROM user_message WHERE id = $1", [id]);
     return "Successfully deleted!:)";
   } catch {
     return "Some Error Occurred Sorry";
@@ -151,9 +144,8 @@ async function deleteUserMessage(id) {
 
 async function updateUser(email, number, gender, name, role, id) {
   try {
-    const user = id;
-    const query = await pool.query(
-      "UPDATE users SET email=?,number=?,gender=?,name=?,role=? WHERE id = ?",
+    await pool.query(
+      "UPDATE users SET email=$1, number=$2, gender=$3, name=$4, role=$5 WHERE id = $6",
       [email, number, gender, name, role, id]
     );
     return "Successfully updated!:)";
@@ -168,20 +160,17 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user:"gone99768@gmail.com",
-    pass:"ofxwkcstvyojdekt",
+    user: "gone99768@gmail.com",
+    pass: "ofxwkcstvyojdekt",
   },
 });
-
-// console.log("EMAIL_USER:", process.env.EMAIL_USER);
-// console.log("EMAIL_PASSWORD:", process.env.EMAIL_PASSWORD ? "Loaded" : "Missing");
 
 async function sendVerificationCode(toEmail) {
   const random_six_digit_code = Math.floor(100000 + Math.random() * 900000);
   console.log("Random code is: ", random_six_digit_code);
 
   const mailOptions = {
-    from:"gone99768@gmail.com",
+    from: "gone99768@gmail.com",
     to: toEmail,
     subject: "Verification Code || Cleanovaa",
     text: `Your code is ${random_six_digit_code}`,
@@ -195,13 +184,13 @@ async function sendVerificationCode(toEmail) {
     throw new Error("Failed to send verification email.");
   }
 }
-async function test(){
-  let x = await encrypt("062606260626")
-  console.log(x)
+
+async function test() {
+  let x = await encrypt("062606260626");
+  console.log(x);
 }
-test()
-// console.log(process.env.EMAIL_USER, process.env.EMAIL_PASSWORD);
-// Export all functions
+test();
+
 module.exports = {
   createUser,
   checkUser,
