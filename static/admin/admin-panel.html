@@ -487,7 +487,7 @@
 
   // Fetch users
   document.addEventListener("DOMContentLoaded", function () {
-    fetch("https://cleanovaa.com/api/users")
+    fetch("/api/users")
       .then((res) => res.json())
       .then((data) => {
         const tableBody = document.getElementById("user-table");
@@ -518,7 +518,7 @@
       });
 
     // Fetch user messages
-    fetch("https://cleanovaa.com/api/user_messages")
+    fetch("/api/user_messages")
       .then((res) => res.json())
       .then((data) => {
         const tableBody = document.getElementById("message-table");
@@ -568,7 +568,7 @@
   }
 
   function hardDeleteUser(userId, btn) {
-    fetch(`https://cleanovaa.com/api/users/${userId}`, {
+    fetch(`/api/users/${userId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -619,7 +619,7 @@
     const updatedName = cells[4].querySelector("input").value;
     const updatedRole = cells[5].querySelector("input").value;
 
-    fetch(`https://cleanovaa.com/api/users/update/${userId}/${updatedEmail}/${updatedNumber}/${updatedGender}/${updatedName}/${updatedRole}`, {
+    fetch(`/api/users/update/${userId}/${updatedEmail}/${updatedNumber}/${updatedGender}/${updatedName}/${updatedRole}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -639,7 +639,7 @@
 
   // Delete message
   function deleteMessage(msgId, btn) {
-    fetch(`https://cleanovaa.com/api/user_messages/delete/${msgId}`, {
+    fetch(`/api/user_messages/delete/${msgId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
