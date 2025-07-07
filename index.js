@@ -583,24 +583,26 @@ app.post("/verify-email", async (req, res) => {
   let decodedRegistrationToken;
   try {
     decodedRegistrationToken = jwt.verify(registrationToken, JWT_SECRET);
+    console.log("[/verify-email] Decoded registration token:", decodedRegistrationToken);
   } catch (err) {
-    return res.redirect("/user-exists", {
-          });
+    console.error("[/verify-email] Registration token invalid:", err);
+    return res.redirect("/user-exists");
   }
-  checkUserAuthentication(decodedRegistrationToken.email)
-    .then((result) => {
-      if (result === "User exists.") {
-        return res.render("authentication.ejs", {
-          error: "User already exists. Please log in.",
-        });
-      }
-    })
-    .catch(() => {
-      return res.render("authentication.ejs", {
-        error: "Error checking user.",
-      });
+  const emailToCheck = decodedRegistrationToken.email;
+  console.log("[/verify-email] Checking if user exists for email:", emailToCheck);
+
+  const result = await checkUserAuthentication(emailToCheck);
+  console.log("[/verify-email] checkUserAuthentication result:", result);
+
+  if (result === "User exists.") {
+    console.log("[/verify-email] User already exists, rendering error.");
+    return res.render("authentication.ejs", {
+      error: "User already exists. Please log in.",
     });
+  }
+
   if (!token) {
+    console.log("[/verify-email] No verification token found.");
     return res.render("authentication.ejs", {
       error: "Verification expired. Please request a new code.",
     });
@@ -610,13 +612,15 @@ app.post("/verify-email", async (req, res) => {
     const decoded = jwt.verify(token, JWT_SECRET);
     const userCode = String(code).trim();
     const expectedCode = String(decoded.VerificationCode).trim();
+    console.log("[/verify-email] User code:", userCode, "Expected code:", expectedCode);
 
     if (userCode === expectedCode) {
+      console.log("[/verify-email] Codes match, creating user...");
       await createUser(
         decodedRegistrationToken.email,
         decodedRegistrationToken.password,
         decodedRegistrationToken.number,
-        decodedRegistrationToken.gender,
+        decodedRegistrationToken.gender.charAt(0).toUpperCase() + decodedRegistrationToken.gender.slice(1).toLowerCase(),
         decodedRegistrationToken.name
       );
       const loginToken = jwt.sign(
@@ -628,13 +632,16 @@ app.post("/verify-email", async (req, res) => {
         { expiresIn: "1h" }
       );
       res.cookie("token", loginToken, { httpOnly: true, maxAge: 60 * 60 * 1000 });
+      console.log("[/verify-email] User created and logged in, redirecting to homepage-logged.");
       return res.redirect("/homepage-logged");
     } else {
+      console.log("[/verify-email] Invalid code entered.");
       return res.render("authentication.ejs", {
         error: "Invalid code. Please try again.",
       });
     }
   } catch (err) {
+    console.error("[/verify-email] Verification error:", err);
     return res.render("authentication.ejs", {
       error: "Verification expired. Please request a new code.",
     });

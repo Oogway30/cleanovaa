@@ -6,11 +6,14 @@ const nodemailer = require("nodemailer");
 
 // PostgreSQL connection pool
 const pool = new Pool({
-  host:   "localhost",
-  user:"postgres",
-  password:  "Prathamgone@123",
-  database:  "postgres",
-  port:  5432,
+  host: process.env.PGHOST || "localhost",
+  user: process.env.PGUSER || "postgres",
+  password: process.env.PGPASSWORD || "",
+  database: process.env.PGDATABASE || "postgres",
+  port: process.env.PGPORT ? parseInt(process.env.PGPORT) : 5432,
+  ssl:{
+    require:true
+  }
 });
 
 async function encrypt(password) {
@@ -46,15 +49,17 @@ async function CreateUserMessage(email, name, subject, message) {
 
 async function checkUserAuthentication(email) {
   try {
+    console.log("[checkUserAuthentication] Checking email:", email);
     const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    console.log("[checkUserAuthentication] Query result:", rows);
     if (rows.length === 0) {
-      // No user found, so email is available for registration
+      console.log("[checkUserAuthentication] No user found, email available.");
       return "Available";
     }
-    // User exists, so email is already taken
+    console.log("[checkUserAuthentication] User exists.");
     return "User exists.";
   } catch (err) {
-    console.error("Error checking user:", err);
+    console.error("[checkUserAuthentication] Error:", err);
     return "Error checking user.";
   }
 }
@@ -160,8 +165,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: "gone99768@gmail.com",
-    pass: "ofxwkcstvyojdekt",
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
@@ -170,7 +175,7 @@ async function sendVerificationCode(toEmail) {
   console.log("Random code is: ", random_six_digit_code);
 
   const mailOptions = {
-    from: "gone99768@gmail.com",
+    from: process.env.EMAIL_USER,
     to: toEmail,
     subject: "Verification Code || Cleanovaa",
     text: `Your code is ${random_six_digit_code}`,
