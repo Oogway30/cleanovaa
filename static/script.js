@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("http://localhost:3000/api/users") // Use relative path
+  fetch("cleanovaa.onrender.com/api/users") // Use relative path
     .then(response => {
       if (!response.ok) {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
