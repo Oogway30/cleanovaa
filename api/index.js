@@ -38,7 +38,6 @@ const {
 // =======================
 const app = express();
 const server = http.createServer(app);
-const port = 3000;
 
 // =======================
 // Middlewares
@@ -684,6 +683,6 @@ app.get("/resend-code", (req, res) => {
 // =======================
 // Server
 // =======================
-app.listen(port, () => {
-  console.log("App is listening on port", port);
+app.listen(process.env.PORT, () => {
+  console.log("App is listening on port", process.env.PORT);
 });
