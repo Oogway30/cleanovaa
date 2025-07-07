@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const http = require("http");
-
+const serverless = require("serverless-http")
 // =======================
 // Environment Setup
 // =======================
@@ -683,6 +683,4 @@ app.get("/resend-code", (req, res) => {
 // =======================
 // Server
 // =======================
-app.listen(process.env.PORT, () => {
-  console.log("App is listening on port", process.env.PORT);
-});
+module.exports = serverless(app);
