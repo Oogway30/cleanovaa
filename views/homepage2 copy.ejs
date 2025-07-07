@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage | Cleanovaa</title>
+    <link rel="stylesheet" href="homepage2.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=DM+Serif+Text:ital@0;1&family=Lexend:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Welcome Animation */
+      @keyframes fadeSlideDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .content-image h1 {
+        animation: fadeSlideDown 1.5s ease-in-out;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="nav-div">
+        <h1 class="logo">Cleanovaa</h1>
+        <div class="extras">
+          <nav>
+            <ul class="nav-ul">
+              <% if (user) { %>
+              <li><a class="contact" href="/homepage-logged">Home</a></li>
+              <% } else { %>
+              <li><a class="contact" href="/homepage">Home</a></li>
+
+              <% } %>
+              <li><a class="about" href="/about">About</a></li>
+              <li><a class="contact" href="/contact">Contact</a></li>
+              <li><a class="contact service" href="/services">Services</a></li>
+              <li><a class="contact service" href="/booking">Booking</a></li>
+              <% if (user) { %>
+              <li><a class="sign" href="/logout">Logout</a></li>
+              <% } else { %>
+              <li>
+                <a href="/login" class="sign-a">
+                  <div class="sign">Sign up/Log in</div>
+                </a>
+              </li>
+              <% } %>
+              <li>
+                <svg
+                  class="svg"
+                  width="35px"
+                  height="35px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 6H20M4 12H20M4 18H20"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider Navbar (Mobile Menu) -->
+    <div class="slider-navbar" id="sliderNavbar">
+      <ul class="slider-ul">
+        <% if (user) { %>
+        <li><a class="contact" href="/homepage-logged">Home</a></li>
+        <% } else { %>
+        <li><a class="contact" href="/homepage">Home</a></li>
+        <% } %>
+        <div class="line"></div>
+        <li><a class="about" href="/about">About</a></li>
+        <div class="line"></div>
+        <li><a class="contact" href="/contact">Contact</a></li>
+        <div class="line"></div>
+        <li><a class="contact service" href="/services">Services</a></li>
+        <div class="line"></div>
+        <li><a class="contact service" href="/booking">Booking</a></li>
+        <div class="line"></div>
+        <% if (user) { %> 
+        <li><a class="sign" href="/logout">Logout</a></li>
+        <% } else { %>
+        <li>
+          <a href="/login" class="sign">
+            <div class="sign">Sign up/Log in</div>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+
+    <div class="masterfoto-div">
+      <img class="master-foto" src="master-photo2.jpg" alt="homepage-foto" />
+      <div class="content-image">
+        <% if (user) { %>
+        <h1>WELCOME! <%= user.name %></h1>
+        <% } else { %>
+        <h1>WELCOME!</h1>
+        <% } %>
+      </div>
+    </div>
+    <main>
+      <div class="content-1">
+        <h1 class="heading-1">A Cleaner Space, A Happier You</h1>
+        <p>
+          There's nothing like walking into a fresh, spotless space. At Clean
+          Choice, we take care of the cleaning so you don't have to. Whether
+          it's your home or workplace, we'll make sure every corner is neat,
+          tidy, and inviting—just the way you like it.
+        </p>
+      </div>
+      <div>
+        <img class="master-foto2" src="./images/master-foto2.jpg" alt="foto2" />
+      </div>
+      <div class="big-2">
+        <div class="content-2">
+          <h1 class="heading-2">About Us</h1>
+          <p class="text-2">
+            Welcome to Cleanovaa! With over 7 years of experience, we
+            transform spaces into spotless, healthy environments. Our attention
+            to detail ensures top-quality cleaning you can rely on. Learn more
+            about our journey on our About page.
+          </p>
+          <a href="/about2.html">
+            <input
+              type="button"
+              class="image-button about-button common-button"
+              value="About Us"
+              id="button-2"
+            />
+          </a>
+        </div>
+        <div class="content-2-contact">
+          <h1 class="heading-2">Contact Us</h1>
+          <p class="text-2">
+            Have a question or need a service? Contact us and we'll respond
+            promptly. Your satisfaction is our priority!
+          </p>
+          <a href="/contact2.html">
+            <input
+              type="button"
+              class="about-button image-button common-button"
+              value="Contact Us"
+              id="button-3"
+            />
+          </a>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2025 Cleanovaa. All rights reserved.</p>
+        <nav class="footer-nav">
+          <ul class="footer-ul">
+            <li class="footer-li"><a href="/homepage">Home</a></li>
+            <li class="footer-li"><a href="/about">About</a></li>
+            <li class="footer-li"><a href="/contact">Contact</a></li>
+            <li class="footer-li"><a href="/services">Services</a></li>
+            <li class="footer-li"><a href="/booking">Booking</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script src="homepage2.js"></script>
+  </body>
+</html>

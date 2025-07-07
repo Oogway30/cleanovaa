@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Exists | Cleanovaa</title>
+    <style>
+      /* General Styling */
+      body {
+        background-color: #f4f4f4;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      header {
+        background-color: #ffad4f;
+        color: white;
+        width: 100%;
+        padding: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: slideInDown 1s ease-out;
+      }
+
+      .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 90%;
+        animation: fadeIn 1.5s ease-in-out;
+        position: relative;
+      }
+
+      h1 {
+        color: #ffad4f;
+        font-size: 28px;
+        margin-bottom: 20px;
+        animation: bounceIn 1.2s ease-in-out;
+      }
+
+      p {
+        color: #555;
+        font-size: 18px;
+        margin-bottom: 30px;
+        animation: fadeInUp 1.5s ease-in-out;
+      }
+
+      .btn {
+        background-color: #ffad4f;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        animation: pulse 2s infinite;
+      }
+
+      .btn:hover {
+        background-color: #bb5008;
+        transform: scale(1.1);
+      }
+
+      footer {
+        margin-top: 20px;
+        color: #777;
+        font-size: 14px;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      /* Animations */
+      @keyframes slideInDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Background Animation */
+      .background-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .circle {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 173, 79, 0.3);
+        animation: float 6s infinite ease-in-out;
+      }
+
+      .circle:nth-child(1) {
+        width: 200px;
+        height: 200px;
+        top: 10%;
+        left: 20%;
+        animation-delay: 0s;
+      }
+
+      .circle:nth-child(2) {
+        width: 300px;
+        height: 300px;
+        top: 50%;
+        left: 70%;
+        animation-delay: 2s;
+      }
+
+      .circle:nth-child(3) {
+        width: 150px;
+        height: 150px;
+        top: 80%;
+        left: 30%;
+        animation-delay: 4s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) scale(1.1);
+        }
+        100% {
+          transform: translateY(0) scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>Cleanovaa</header>
+    <div class="background-animation">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+    <div class="container">
+      <h1>User Already Exists</h1>
+      <p>The email you tried to register is already in use. Please try logging in or use a different email.</p>
+      <a href="/register" class="btn">Go Back to Registration</a>
+    </div>
+    <footer>&copy; 2025 Cleanovaa. All rights reserved.</footer>
+  </body>
+</html>

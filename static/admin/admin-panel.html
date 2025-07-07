@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel || Clean Choice</title>
+  <style>
+    body {
+      background-color: #fff;
+      color: #333;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #ffad4f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin-top: 20px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .form-container {
+      margin-bottom: 20px;
+      display: none;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .form-container input,
+    td input[type="text"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    td input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    td input[type="text"]:focus {
+      border-color: #ffad4f;
+      box-shadow: 0 0 5px rgba(255, 173, 79, 0.5);
+      outline: none;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar .search-container input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      border: 2px solid #ffad4f;
+      border-radius: 6px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .toolbar .right-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ffad4f;
+      color: white;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #ffe0b3;
+      transition: 0.3s;
+    }
+
+    .action-btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 2px;
+    }
+
+    .update-btn {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .cancel-btn {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .save-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .add-user-btn, .csv-btn, .add-message-btn, .csv-msg-btn {
+      background-color: #ffa500;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .csv-btn, .csv-msg-btn {
+      background-color: #4f94d4;
+    }
+
+    .add-message-btn {
+      background-color: #ff7f50;
+    }
+
+    .csv-msg-btn {
+      background-color: #6a5acd;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 120px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .dropdown-content button {
+      background: none;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content button:hover {
+      background-color: #f1f1f1;
+    }
+
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      background: #eee;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 8px 8px 0 0;
+      font-size: 16px;
+      cursor: pointer;
+      transition: border 0.3s;
+      font-weight: bold;
+      color: #333;
+      transition: background 0.2s;
+    }
+
+    .tab-btn.active {
+      background: #ffad4f;
+      color: #fff;
+    }
+    #messages-tab-btn.tab-btn.active {
+      background: #6a5acd;
+      color: #fff;
+    }
+    #user-tab-btn.tab-btn.active {
+      background: #ffad4f;
+      color: #fff;
+    }
+
+    .message-table th {
+      background-color: #6a5acd;
+    }
+
+    .message-table tr:hover {
+      background-color: #e6e6fa;
+    }
+
+    .message-form-container {
+      margin-bottom: 20px;
+      display: none;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .message-form-container input,
+    .message-form-container textarea {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .message-form-container textarea {
+      resize: vertical;
+      min-height: 40px;
+      max-height: 120px;
+      width: 250px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      background-color: #ffad4f;
+      color: white;
+      width: 100vw;
+      font-size: 18px;
+      position: relative;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+<header>Admin Panel || Clean Choice</header>
+<div class="container">
+  <div class="tab-buttons">
+    <button class="tab-btn active" id="user-tab-btn" onclick="showTab('users')">Users</button>
+    <button class="tab-btn" id="messages-tab-btn" onclick="showTab('messages')">User Messages</button>
+  </div>
+
+  <!-- USERS TAB -->
+  <div id="users-tab">
+    <div class="toolbar">
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Search users..." />
+      </div>
+      <div class="right-buttons">
+        <button class="add-user-btn" onclick="toggleAddForm()">Add User</button>
+        <button class="csv-btn" onclick="downloadCSV('user-table', 'users.csv')">Export CSV</button>
+      </div>
+    </div>
+
+    <div class="form-container" id="add-user-form">
+      <input type="text" id="new-email" placeholder="Email" />
+      <input type="text" id="new-number" placeholder="Number" />
+      <input type="text" id="new-gender" placeholder="Gender" />
+      <input type="text" id="new-name" placeholder="Name" />
+      <input type="text" id="new-role" placeholder="Role" />
+      <input type="password" id="new-password" placeholder="Password" />
+      <div class="button-group">
+        <button class="action-btn save-btn" onclick="addUser()">Save</button>
+        <button class="action-btn cancel-btn" onclick="toggleAddForm()">Cancel</button>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Number</th>
+        <th>Gender</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody id="user-table"></tbody>
+    </table>
+  </div>
+
+  <!-- MESSAGES TAB -->
+  <div id="messages-tab" style="display:none;">
+    <div class="toolbar">
+      <div class="search-container">
+        <input type="text" id="search-messages" placeholder="Search messages..." />
+      </div>
+      <div class="right-buttons">
+        <button class="add-message-btn" onclick="toggleMessageForm()">Add Message</button>
+        <button class="csv-msg-btn" onclick="downloadCSV('message-table', 'user_messages.csv')">Export CSV</button>
+      </div>
+    </div>
+
+    <div class="message-form-container" id="add-message-form">
+      <input type="text" id="msg-email" placeholder="Email" />
+      <input type="text" id="msg-name" placeholder="Name" />
+      <input type="text" id="msg-subject" placeholder="Subject" />
+      <textarea id="msg-message" placeholder="Message"></textarea>
+      <div class="button-group">
+        <button class="action-btn save-btn" onclick="addMessage()">Save</button>
+        <button class="action-btn cancel-btn" onclick="toggleMessageForm()">Cancel</button>
+      </div>
+    </div>
+
+    <table class="message-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody id="message-table"></tbody>
+    </table>
+  </div>
+</div>
+<footer>&copy; 2025 Admin Panel || Clean Choice</footer>
+
+<script>
+  // Tab switching logic
+  document.getElementById('user-tab-btn').addEventListener('click', function() {
+    document.body.style.backgroundColor = "#fff";
+    document.querySelector('header').style.backgroundColor = "#ffad4f";
+    document.querySelector('header').style.color = "#fff";
+    document.querySelector('footer').style.backgroundColor = "#ffad4f";
+    document.querySelector('footer').style.color = "#fff";
+  });
+
+  document.getElementById('messages-tab-btn').addEventListener('click', function() {
+    document.body.style.backgroundColor = "#f8f7ff";
+    document.querySelector('header').style.backgroundColor = "#6a5acd";
+    document.querySelector('header').style.color = "#fff";
+    document.querySelector('footer').style.backgroundColor = "#6a5acd";
+    document.querySelector('footer').style.color = "#fff";
+  });
+  const year = new Date().getFullYear();
+  const footer = document.querySelector("footer");
+  footer.innerHTML = `&copy; ${year} Admin Panel || Clean Choice`;
+  function showTab(tab) {
+    const userSearchInput = document.getElementById("search");
+    const messageSearchInput = document.getElementById("search-messages");
+
+    document.getElementById("users-tab").style.display = tab === "users" ? "" : "none";
+    document.getElementById("messages-tab").style.display = tab === "messages" ? "" : "none";
+    document.getElementById("user-tab-btn").classList.toggle("active", tab === "users");
+    document.getElementById("messages-tab-btn").classList.toggle("active", tab === "messages");
+
+    // Change footer and search input styles based on the active tab
+    if (tab === "messages") {
+      footer.style.backgroundColor = "#6a5acd";
+      footer.style.color = "#fff";
+      messageSearchInput.style.borderColor = "#6a5acd"; // Purple border for messages tab
+      userSearchInput.style.borderColor = ""; // Reset user search input border
+    } else {
+      footer.style.backgroundColor = "#ffad4f";
+      footer.style.color = "#fff";
+      userSearchInput.style.borderColor = "#ffad4f"; // Yellow border for users tab
+      messageSearchInput.style.borderColor = ""; // Reset message search input border
+    }
+  }
+
+  // User form toggle
+  function toggleAddForm() {
+    const form = document.getElementById("add-user-form");
+    form.style.display = form.style.display === "flex" ? "none" : "flex";
+  }
+
+  // Message form toggle
+  function toggleMessageForm() {
+    const form = document.getElementById("add-message-form");
+    form.style.display = form.style.display === "flex" ? "none" : "flex";
+    footer.style.backgroundColor = "#6a5acd";
+    footer.style.color = "#fff";
+
+  }
+
+  // Add user
+  function addUser() {
+    const email = document.getElementById("new-email").value;
+    const number = document.getElementById("new-number").value;
+    const gender = document.getElementById("new-gender").value;
+    const name = document.getElementById("new-name").value;
+    const role = document.getElementById("new-role").value;
+    const password = document.getElementById("new-password").value;
+
+    if (!email || !number || !gender || !name || !role || !password) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    fetch(`/api/users/add/${email}/${password}/${number}/${gender}/${name}/${role}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+      .then(res => res.json())
+      .then(data => {
+        location.reload();
+      })
+      .catch(err => console.error("Error adding user:", err));
+  }
+
+  // Add message
+  function addMessage() {
+    const email = document.getElementById("msg-email").value;
+    const name = document.getElementById("msg-name").value;
+    const subject = document.getElementById("msg-subject").value;
+    const message = document.getElementById("msg-message").value;
+
+    if (!email || !name || !subject || !message) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    fetch(`/api/user_messages/add/${email}/${name}/${subject}/${encodeURIComponent(message)}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+      .then(res => res.json())
+      .then(data => {
+        location.reload();
+      })
+      .catch(err => console.error("Error adding message:", err));
+  }
+
+  // Fetch users
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("http://localhost:3000/api/users")
+      .then((res) => res.json())
+      .then((data) => {
+        const tableBody = document.getElementById("user-table");
+        tableBody.innerHTML = "";
+
+        data.forEach((user) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.email}</td>
+            <td>${user.number}</td>
+            <td>${user.gender}</td>
+            <td>${user.name}</td>
+            <td>${user.role}</td>
+            <td>
+              <button class="action-btn update-btn" onclick="updateUser(${user.id}, '${user.email}', '${user.number}', '${user.gender}', '${user.name}', '${user.role}')">Update</button>
+              <div class="dropdown">
+                <button class="action-btn delete-btn">Delete ▼</button>
+                <div class="dropdown-content">
+                  <button onclick="softDeleteUser(${user.id}, this)">Soft Delete</button>
+                  <button onclick="hardDeleteUser(${user.id}, this)">Hard Delete</button>
+                </div>
+              </div>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      });
+
+    // Fetch user messages
+    fetch("http://localhost:3000/api/user_messages")
+      .then((res) => res.json())
+      .then((data) => {
+        const tableBody = document.getElementById("message-table");
+        tableBody.innerHTML = "";
+
+        data.forEach((msg) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${msg.id}</td>
+            <td>${msg.email}</td>
+            <td>${msg.name}</td>
+            <td>${msg.subject}</td>
+            <td>${msg.message}</td>
+            <td>
+              <button class="action-btn delete-btn" onclick="deleteMessage(${msg.id}, this)">Delete</button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      });
+  });
+
+  // User search
+  document.getElementById("search").addEventListener("input", function () {
+    let filter = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#user-table tr");
+    rows.forEach((row) => {
+      let text = row.innerText.toLowerCase();
+      row.style.display = text.includes(filter) ? "" : "none";
+    });
+  });
+
+  // Message search
+  document.getElementById("search-messages").addEventListener("input", function () {
+    let filter = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#message-table tr");
+    rows.forEach((row) => {
+      let text = row.innerText.toLowerCase();
+      row.style.display = text.includes(filter) ? "" : "none";
+    });
+  });
+
+  function softDeleteUser(userId, btn) {
+    const row = btn.closest("tr");
+    row.remove();
+    console.log(`Soft deleted user ${userId}`);
+  }
+
+  function hardDeleteUser(userId, btn) {
+    fetch(`http://localhost:3000/api/users/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then(() => {
+        const row = btn.closest("tr");
+        row.remove();
+      })
+      .catch((err) => console.error("Hard delete error:", err));
+  }
+
+  function updateUser(userId, email, number, gender, name, role) {
+    // Find the correct row by userId
+    const rows = document.querySelectorAll("#user-table tr");
+    let row = null;
+    rows.forEach(r => {
+      if (r.children[0].innerText == userId) row = r;
+    });
+    if (!row) return;
+    const cells = row.querySelectorAll("td");
+
+    cells[1].innerHTML = `<input type="text" value="${email}">`;
+    cells[2].innerHTML = `<input type="text" value="${number}">`;
+    cells[3].innerHTML = `<input type="text" value="${gender}">`;
+    cells[4].innerHTML = `<input type="text" value="${name}">`;
+    cells[5].innerHTML = `<input type="text" value="${role}">`;
+
+    const updateBtn = row.querySelector(".update-btn");
+    updateBtn.innerText = "Save";
+    updateBtn.setAttribute("onclick", `saveUser(${userId})`);
+  }
+
+  function saveUser(userId) {
+    // Find the correct row by userId
+    const rows = document.querySelectorAll("#user-table tr");
+    let row = null;
+    rows.forEach(r => {
+      if (r.children[0].innerText == userId) row = r;
+    });
+    if (!row) return;
+    const cells = row.querySelectorAll("td");
+
+    const updatedEmail = cells[1].querySelector("input").value;
+    const updatedNumber = cells[2].querySelector("input").value;
+    const updatedGender = cells[3].querySelector("input").value;
+    const updatedName = cells[4].querySelector("input").value;
+    const updatedRole = cells[5].querySelector("input").value;
+
+    fetch(`http://localhost:3000/api/users/update/${userId}/${updatedEmail}/${updatedNumber}/${updatedGender}/${updatedName}/${updatedRole}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    cells[1].innerHTML = updatedEmail;
+    cells[2].innerHTML = updatedNumber;
+    cells[3].innerHTML = updatedGender;
+    cells[4].innerHTML = updatedName;
+    cells[5].innerHTML = updatedRole;
+
+    const updateBtn = row.querySelector(".update-btn");
+    updateBtn.innerText = "Update";
+    updateBtn.setAttribute("onclick", `updateUser(${userId}, '${updatedEmail}', '${updatedNumber}', '${updatedGender}', '${updatedName}', '${updatedRole}')`);
+  }
+
+  // Delete message
+  function deleteMessage(msgId, btn) {
+    fetch(`http://localhost:3000/api/user_messages/delete/${msgId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then(() => {
+        const row = btn.closest("tr");
+        row.remove();
+      })
+      .catch((err) => console.error("Delete message error:", err));
+  }
+
+  // Download CSV for both tables
+  function downloadCSV(tableId, filename) {
+    const table = document.getElementById(tableId).closest('table');
+    const rows = Array.from(table.querySelectorAll("tr"));
+    const csv = rows.map(row => {
+      const cells = row.querySelectorAll("th, td");
+      return Array.from(cells).map(cell => `"${cell.innerText.replace(/"/g, '""')}"`).join(",");
+    }).join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body>
+</html>

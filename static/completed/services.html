@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services | Clean Choice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=DM+Serif+Text:ital@0;1&family=Lexend:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Navbar Styles (from provided code) */
+      .extras nav ul li {
+        list-style: none;
+      }
+      .nav-ul {
+        display: flex;
+        gap: 2rem;
+        margin-left: -13rem;
+      }
+      .nav-div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 95vw;
+      }
+      .navbar {
+        font-family: "Comfortaa", sans-serif;
+        max-width: 100%;
+        position: sticky;
+        z-index: 10;
+        background-color: #ffad4f;
+        padding: 1vw;
+        top: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 200px;
+      }
+      a {
+        text-decoration-line: none;
+        color: black;
+      }
+      .sign {
+        background-color: #bb5008;
+        border-radius: 1rem;
+        padding: 10px;
+        margin: 0px;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+      }
+      .sign:hover {
+        padding: 1vw;
+      }
+      ul {
+        display: flex;
+        gap: 2rem;
+        margin-left: -13rem;
+      }
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .contact,
+      .about {
+        transition: padding 0.2s ease-in-out;
+      }
+      .contact:hover,
+      .about:hover {
+        background-color: #bb5008;
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+      }
+
+      /* Services Page Styles */
+      body {
+        font-family: "Lexend", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        text-align: center;
+      }
+      main.services {
+        padding: 2rem;
+      }
+      main.services h2 {
+        margin-bottom: 2rem;
+        font-size: 2rem;
+      }
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1.5rem;
+        transition: transform 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
+      .card-content h3 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+      .card-content p {
+        font-size: 1rem;
+        color: #555;
+      }
+
+      /* Footer Styles */
+      .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 1.5rem 1rem;
+        text-align: center;
+        font-family: "Lexend", sans-serif;
+        position: relative;
+        top: 0px;
+      }
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .footer-nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        margin: 1rem auto 0;
+      }
+      .footer-nav a {
+        color: #fff;
+        transition: color 0.3s ease;
+      }
+      .footer-nav a:hover {
+        color: #ffad4f;
+      }
+      @media only screen and (max-width:500px){
+        @media only screen and (max-width: 768px) {
+    .logo {
+        font-size: 1.7rem;
+        }
+}
+      }
+      
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="nav-div">
+        <h1 class="logo">Clean Choice</h1>
+        <div class="extras">
+          <nav>
+            <ul class="nav-ul">
+              <li><a class="contact" href="./contact.html">Contact</a></li>
+              <li>
+                <a class="contact service" href="./services.html">Services</a>
+              </li>
+              <li><a class="about" href="./about.html">About</a></li>
+              <li>
+                <a href="./completed/login.html">
+                  <div class="sign">Sign up/Log in</div>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Services Section -->
+    <main class="services">
+      <h2>Our Services</h2>
+      <div class="cards-container">
+        <!-- Card 1 -->
+        <a href="dummy1.html" class="card">
+          <div class="card-content">
+            <h3>Service 1</h3>
+            <p>Dummy text for service 1 description.</p>
+          </div>
+        </a>
+        <!-- Card 2 -->
+        <a href="dummy2.html" class="card">
+          <div class="card-content">
+            <h3>Service 2</h3>
+            <p>Dummy text for service 2 description.</p>
+          </div>
+        </a>
+        <!-- Card 3 -->
+        <a href="dummy3.html" class="card">
+          <div class="card-content">
+            <h3>Service 3</h3>
+            <p>Dummy text for service 3 description.</p>
+          </div>
+        </a>
+        <!-- Card 4 -->
+        <a href="dummy4.html" class="card">
+          <div class="card-content">
+            <h3>Service 4</h3>
+            <p>Dummy text for service 4 description.</p>
+          </div>
+        </a>
+        <a href="dummy4.html" class="card">
+          <div class="card-content">
+            <h3>Service 5</h3>
+            <p>Dummy text for service 4 description.</p>
+          </div>
+        </a>
+        <a href="dummy4.html" class="card">
+          <div class="card-content">
+            <h3>Service 6</h3>
+            <p>Dummy text for service 4 description.</p>
+          </div>
+        </a>
+        <a href="dummy4.html" class="card">
+          <div class="card-content">
+            <h3>Service 7</h3>
+            <p>Dummy text for service 4 description.</p>
+          </div>
+        </a>
+        <a href="dummy4.html" class="card">
+          <div class="card-content">
+            <h3>Service 8</h3>
+            <p>Dummy text for service 4 description.</p>
+          </div>
+        </a>
+        <a href="dummy4.html" class="card">
+          <div class="card-content">
+            <h3>Service 9</h3>
+            <p>Dummy text for service 4 description.</p>
+          </div>
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2025 Clean Choice. All rights reserved.</p>
+        <nav class="footer-nav">
+          <ul>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./services.html">Services</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script src="services.js"></script>
+  </body>
+</html>

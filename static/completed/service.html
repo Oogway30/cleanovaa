@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Service Information | Clean Choice</title>
+    <link rel="stylesheet" href="service.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Lexend:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      body {
+        font-family: "Lexend", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      /* Navbar */
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 40vh;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+      .hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.5);
+        padding: 0.5rem 2rem 0.5rem 2rem;
+        border-radius: 8px;
+        color: #fff;
+        text-align: center;
+      }
+      /* Main Content */
+      .content {
+        max-width: 1200px;
+        margin: 2rem auto;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .service-details h2 {
+        margin-top: 0;
+      }
+      .service-features {
+        padding-left: 2rem;
+        display: flex;
+        flex-direction: column;
+      }
+      /* Footer */
+      .footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 1rem;
+      }
+      .navbar {
+        font-family: "Comfortaa", sans-serif;
+        max-width: 100%;
+        position: sticky;
+        z-index: 10;
+        background-color: #ffad4f;
+        padding: 1vw;
+        top: 0;
+        display: flex;
+        align-items: center; /* Align items vertically */
+        justify-content: space-between; /* Space out logo and nav */
+      }
+
+      .nav-div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .nav-ul {
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      .nav-ul li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+
+      .sign {
+        background-color: #bb5008;
+        border-radius: 1rem;
+        padding: 8px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .sign:hover {
+        padding: 1vw;
+      }
+
+      .contact,
+      .about {
+        transition: padding 0.2s ease-in-out;
+      }
+
+      .contact:hover,
+      .about:hover {
+        background-color: #bb5008;
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        white-space: nowrap; /* Prevents wrapping */
+      }
+      @media only screen and (max-width:500px){
+        .logo{
+          font-size: 1.7rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="nav-div">
+        <h1 class="logo">Clean Choice</h1>
+        <div class="extras">
+          <nav>
+            <ul class="nav-ul">
+              <li><a class="contact" href="./contact.html">Contact</a></li>
+              <li>
+                <a class="contact service" href="./contact.html">Services</a>
+              </li>
+              <li><a class="about" href="./about.html">About</a></li>
+              <li>
+                <a href="./login.html">
+                  <div class="sign">Sign up/Log in</div>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <img src="./images/about-image.jpg" alt="Service Hero Image" />
+      <div class="hero-overlay">
+        <h2>House Cleaning</h2>
+      </div>
+    </section>
+
+    <!-- Main Service Content -->
+    <main class="content">
+      <div class="service-details">
+        <h2>House Cleaning Service</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+          eget mi at leo aliquet semper. Nulla facilisi. Mauris vel justo eu
+          lorem suscipit interdum.
+        </p>
+        <h3>What This Service Offers:</h3>
+        <ul class="service-features">
+          <li>
+            Comprehensive cleaning solutions for residential and commercial
+            spaces.
+          </li>
+          <li>Eco-friendly products and methods.</li>
+          <li>Expert and dedicated team.</li>
+          <li>Customized cleaning plans to suit your needs.</li>
+        </ul>
+        <h3>When To Choose This Service</h3>
+        <p>
+          Sed posuere consectetur est at lobortis. Cras mattis consectetur purus
+          sit amet fermentum. Praesent commodo cursus magna, vel scelerisque
+          nisl consectetur et. Nulla vitae elit libero, a pharetra augue.
+        </p>
+        <p>
+          Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
+          Curabitur blandit tempus porttitor.
+        </p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2025 Clean Choice. All rights reserved.</p>
+    </footer>
+    <script>
+      if (screen.width <= 700) {
+        let contact = document.querySelector(".contact");
+        contact.setAttribute("hidden", "");
+      }
+      if (screen.width <= 600) {
+        let service = document.querySelector(".service");
+        service.setAttribute("hidden", "");
+      }
+      if (screen.width <= 500) {
+        let about = document.querySelector(".about");
+        let image = document.querySelector("img");
+        let contact = document.querySelector(".contact");
+        let service = document.querySelector(".service");
+        about.setAttribute("hidden", "");
+        contact.setAttribute("hidden", "");
+        service.setAttribute("hidden", "");
+      }
+    </script>
+  </body>
+</html>

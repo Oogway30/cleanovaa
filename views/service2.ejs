@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Service Information | Cleanovaa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Lexend:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Lexend", sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        overflow-x: hidden;
+      }
+      /* Navbar Styles */
+      .navbar {
+        font-family: "Comfortaa", sans-serif;
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        background-color: #ffad4f;
+        padding: 2vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-div {
+        width: 95vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-ul {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+      .nav-ul li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      .contact,
+      .about {
+        transition: padding 0.2s ease-in-out;
+      }
+      .contact:hover,
+      .about:hover {
+        background-color: #bb5008;
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+      }
+      .sign {
+        background-color: #bb5008;
+        border-radius: 1rem;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+      }
+      .sign:hover {
+        padding: 1vw;
+      }
+      /* Slider Navbar (Mobile Menu) */
+      .slider-navbar {
+        position: fixed;
+        top: 72px;
+        right: 0;
+        width: 250px;
+        background-color: #ffad4f;
+        transition: transform 1s ease-in-out;
+        z-index: 110;
+        border-radius: 2rem 0 0.5rem 3rem;
+        transform: translateX(250px);
+      }
+      .slider-navbar.active {
+        transform: translateX(0);
+      }
+      .slider-ul {
+        list-style: none;
+        margin: 0;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .slider-ul li {
+        text-align: center;
+      }
+      .slider-ul a {
+        font-size: 20px;
+        color: black;
+      }
+      .svg {
+        cursor: pointer;
+      }
+      .no-svg {
+        display: none;
+      }
+      /* Hero Section */
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 40vh;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+      .hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.5);
+        padding: 0.5rem 2rem;
+        border-radius: 8px;
+        color: #fff;
+        text-align: center;
+      }
+      /* Main Content */
+      .content {
+        max-width: 1200px;
+        margin: 2rem auto;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .service-details h2 {
+        margin-top: 0;
+      }
+      .service-features {
+        padding-left: 2rem;
+        display: flex;
+        flex-direction: column;
+      }
+      /* Booking Banner Section */
+      .booking-banner-section {
+        position: relative;
+        width: 100%;
+        height: 250px;
+        margin: 2rem 0;
+        background-color: #ffad4f;
+        border-radius: 8px;
+      }
+      .booking-banner-section::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffad4f;
+        border-radius: 8px;
+      }
+      .booking-banner-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        z-index: 1;
+      }
+      .booking-banner-content h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      .booking-banner-content p {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+      .booking-banner-content a {
+        background-color: #fff;
+        color: #ffad4f;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+      }
+      .booking-banner-content a:hover {
+        background-color: #e6e6e6;
+      }
+      /* Footer */
+      .footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 1.5rem 1rem;
+      }
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .footer-nav ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        margin: 1rem auto 0;
+      }
+      .footer-nav a {
+        color: #fff;
+        transition: color 0.3s ease;
+      }
+      .footer-nav a:hover {
+        color: #ffad4f;
+      }
+      .style-none {
+        list-style: none;
+      }
+
+      /* Responsive Fixes */
+      @media only screen and (max-width: 768px) {
+        .logo {
+          font-size: 1.5rem;
+        }
+        .nav-ul {
+          gap: 1rem;
+        }
+
+        .booking-banner-section {
+          height: auto;
+          padding: 2rem 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .booking-banner-section::after {
+          display: none;
+        }
+
+        .booking-banner-content {
+          position: relative;
+          transform: none;
+          padding: 1rem;
+          color: #fff;
+          text-align: center;
+          z-index: 1;
+        }
+
+        .booking-banner-content h2 {
+          font-size: 1.5rem;
+        }
+
+        .booking-banner-content p {
+          font-size: 1rem;
+        }
+
+        .booking-banner-content a {
+          font-size: 0.9rem;
+        }
+      }
+      .cta {
+        text-align: center;
+        background-color: #ffad4f;
+        color: #fff;
+      }
+      .cta .btn {
+        display: inline-block;
+        margin-top: 1rem;
+        background-color: #bb5008;
+        color: #fff;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      .cta .btn:hover {
+        background-color: #a03e07;
+      }
+      .section {
+        margin-bottom: 2rem;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="nav-div">
+        <h1 class="logo">Cleanovaa</h1>
+        <div class="extras">
+          <nav>
+            <ul class="nav-ul">
+              <% if (user) { %>
+              <li><a class="contact" href="/homepage-logged">Home</a></li>
+              <% } else { %>
+              <li><a class="contact" href="/homepage">Home</a></li>
+              <% } %>
+              <li><a class="about" href="/about">About</a></li>
+              <li><a class="contact" href="/contact">Contact</a></li>
+              <li><a class="contact service" href="/services">Services</a></li>
+              <li><a class="contact service" href="/booking">Booking</a></li>
+              <% if (user) { %>
+              <li><a class="sign" href="/logout">Logout</a></li>
+              <% } else { %>
+              <li>
+                <a href="/login" class="sign-a">
+                  <div class="sign">Sign up/Log in</div>
+                </a>
+              </li>
+              <% } %>
+              <li>
+                <svg
+                  class="svg"
+                  width="35px"
+                  height="35px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 6H20M4 12H20M4 18H20"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider Navbar (Mobile Menu) -->
+    <div class="slider-navbar" id="sliderNavbar">
+      <ul class="slider-ul">
+        <% if (user) { %>
+        <li><a class="contact" href="/homepage-logged">Home</a></li>
+        <% } else { %>
+        <li><a class="contact" href="/homepage">Home</a></li>
+        <% } %>
+        <div class="line"></div>
+        <li><a class="about" href="/about">About</a></li>
+        <div class="line"></div>
+        <li><a class="contact" href="/contact">Contact</a></li>
+        <div class="line"></div>
+        <li><a class="contact service" href="/services">Services</a></li>
+        <div class="line"></div>
+        <li><a class="contact service" href="/booking">Booking</a></li>
+        <div class="line"></div>
+        <% if (user) { %>
+        <li><a class="sign" href="/logout">Logout</a></li>
+        <% } else { %>
+        <li
+          style="
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <a href="/login" class="sign">
+            <div class="sign">Sign up/Log in</div>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <img src="/images/about-image.jpg" alt="Service Hero Image" />
+      <div class="hero-overlay">
+        <h2><%= title %></h2>
+      </div>
+    </section>
+
+    <!-- Main Service Content -->
+    <main class="content">
+      <div class="service-details">
+        <h2><%= title %> Service</h2>
+        <p><%= intro_text %></p>
+        <h3>What This Service Offers:</h3>
+        <ul class="service-features">
+          <li><%= what_offers_txt %></li>
+          <li><%= first %></li>
+          <li><%= second %></li>
+          <li><%= third %></li>
+        </ul>
+        <h3>When To Choose This Service</h3>
+        <p><%= when_to_choose_1 %></p>
+        <p><%= when_to_choose_2 %></p>
+      </div>
+
+      <!-- Booking Banner Section -->
+      <section id="cta" class="section cta">
+        <h2>Ready for a Cleaner, Brighter Space?</h2>
+        <p>
+          Book any of our professional services today and enjoy exceptional
+          results without lifting a finger.
+        </p>
+        <a href="/booking" class="btn">Book Now</a>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2025 Cleanovaa. All rights reserved.</p>
+        <nav class="footer-nav">
+          <ul>
+            <% if (user) { %>
+            <li class="style-none"><a href="/homepage-logged">Home</a></li>
+            <% } else { %>
+            <li class="style-none"><a href="/homepage">Home</a></li>
+            <% } %>
+            <li class="style-none"><a href="/about">About</a></li>
+            <li class="style-none"><a href="/contact">Contact</a></li>
+            <li class="style-none"><a href="/services">Services</a></li>
+            <li class="style-none"><a href="/booking">Booking</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const svg = document.querySelector(".svg");
+        const sliderNavbar = document.getElementById("sliderNavbar");
+
+        if (svg && sliderNavbar) {
+          svg.addEventListener("click", (e) => {
+            e.stopPropagation();
+            sliderNavbar.classList.toggle("active");
+          });
+
+          document.addEventListener("click", (e) => {
+            if (!svg.contains(e.target) && !sliderNavbar.contains(e.target)) {
+              sliderNavbar.classList.remove("active");
+            }
+          });
+        }
+
+        if (screen.width <= 500) {
+          document
+            .querySelectorAll(".nav-ul li:not(:last-child)")
+            .forEach((el) => {
+              el.style.display = "none";
+            });
+        } else {
+          svg?.classList.add("no-svg");
+        }
+      });
+    </script>
+  </body>
+</html>

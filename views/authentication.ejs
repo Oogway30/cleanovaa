@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Authentication | Cleanovaa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General Styling */
+      body {
+        font-family: "Lexend", sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #ffad4f;
+        margin-bottom: 20px;
+        font-family: "Comfortaa", sans-serif;
+      }
+
+      p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+      }
+
+      .code-inputs {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .code-inputs input {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-family: inherit;
+        transition: border-color 0.3s ease;
+      }
+
+      .code-inputs input:focus {
+        border: 2px solid #ffad4f;
+        outline: none;
+      }
+
+      .code-inputs input:nth-child(3) {
+        margin-right: 20px; /* Add gap after the third input */
+      }
+
+      .btn {
+        background-color: #ffad4f;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-family: "Comfortaa", sans-serif;
+      }
+
+      .btn:hover {
+        background-color: #bb5008;
+      }
+
+      .resend {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #555;
+      }
+
+      .resend a {
+        color: #ffad4f;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .resend a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Email Verification</h1>
+      <p>
+        A 6-digit confirmation code has been sent to your email. Please enter it
+        below to verify your account.
+      </p>
+      <% if (typeof error !== "undefined") { %>
+        <div class="error-message" style="color:red; margin-bottom:15px; font-size:14px;"><%= error %></div>
+      <% } %>
+      <form action="/verify-email" method="post" id="verificationForm">
+        <div class="code-inputs">
+          <input type="text" name="digit1" maxlength="1" required />
+          <input type="text" name="digit2" maxlength="1" required />
+          <input type="text" name="digit3" maxlength="1" required />
+          <input type="text" name="digit4" maxlength="1" required />
+          <input type="text" name="digit5" maxlength="1" required />
+          <input type="text" name="digit6" maxlength="1" required />
+        </div>
+        <button type="submit" class="btn">Verify</button>
+      </form>
+      <div class="resend">
+        Didn't receive the code? <a href="/resend-code">Resend Code</a>
+      </div>
+    </div>
+
+    
+    <script>
+      // Function to display an error message above the form
+      function displayError(message) {
+        const form = document.getElementById("verificationForm");
+        let errorDiv = document.querySelector(".error-message");
+        if (!errorDiv) {
+          errorDiv = document.createElement("div");
+          errorDiv.className = "error-message";
+          errorDiv.style.color = "red";
+          errorDiv.style.marginBottom = "15px";
+          errorDiv.style.fontSize = "14px";
+          form.parentNode.insertBefore(errorDiv, form);
+        }
+        errorDiv.textContent = message;
+      }
+      function check_code(){
+        fetch(`/verification`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            code: document.querySelector('input[name="digit1"]').value +
+                  document.querySelector('input[name="digit2"]').value +
+                  document.querySelector('input[name="digit3"]').value +
+                  document.querySelector('input[name="digit4"]').value +
+                  document.querySelector('input[name="digit5"]').value +
+                  document.querySelector('input[name="digit6"]').value
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            document.getElementById("verificationForm").submit();
+          } else {
+            displayError("Invalid code. Please try again.");
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          displayError("An error occurred. Please try again later.");
+        });
+      }
+      // Auto-advance and backspace navigation for code inputs
+      document.querySelectorAll('.code-inputs input').forEach((input, idx, inputs) => {
+        input.addEventListener('input', function () {
+          if (this.value.length === 1 && idx < inputs.length - 1) {
+            inputs[idx + 1].focus();
+          }
+        });
+        input.addEventListener('keydown', function (e) {
+          if (e.key === 'Backspace' && this.value === '' && idx > 0) {
+            inputs[idx - 1].focus();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="homepage.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=DM+Serif+Text:ital@0;1&family=Lexend:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Navbar styles remain unchanged */
+      html {
+        overflow-x: hidden;
+      }
+      .navbar {
+        font-family: "Comfortaa", sans-serif;
+        max-width: 100%;
+        position: fixed;
+        z-index: 100;
+        background-color: #ffad4f;
+        padding: 2vw;
+        top: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 95vw;
+      }
+      .extras nav ul li {
+        list-style: none;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .contact,
+      .about {
+        transition: padding 0.2s ease-in-out;
+      }
+      .contact:hover,
+      .about:hover {
+        background-color: #bb5008;
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+      }
+      .sign {
+        background-color: #bb5008;
+        border-radius: 1rem;
+        padding: 10px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+      }
+      .sign:hover {
+        padding: 1vw;
+      }
+      ul {
+        display: flex;
+        gap: 2rem;
+        margin-left: -13rem;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        overflow-x: hidden;
+        font-family: "Lexend", sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+      }
+
+      /* Reset and basic styling affecting the navbar */
+      .extras nav ul li {
+        list-style: none;
+      }
+
+      .nav-ul {
+        display: flex;
+        gap: 2rem;
+        margin-left: -13rem;
+      }
+
+      .nav-div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 95vw;
+      }
+      .navbar {
+        font-family: "Comfortaa", sans-serif;
+        max-width: 100%;
+        position: sticky;
+        z-index: 10;
+        background-color: #ffad4f;
+        padding: 1vw;
+        top: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 200px;
+        margin-bottom: -100px;
+      }
+      a {
+        text-decoration-line: none;
+        color: black;
+      }
+
+      .sign {
+        background-color: #bb5008;
+        border-radius: 1rem;
+        padding: 7px;
+        margin: 0px;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+        margin: 0 auto;
+      }
+      .sign:hover {
+        /* background-color: #BB5008; */
+        /* border: rgb(0, 0, 0, 0); */
+        padding: 1vw;
+      }
+      ul {
+        display: flex;
+        gap: 2rem;
+        margin-left: -13rem;
+      }
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .contact,
+      .about {
+        transition: padding 0.2s ease-in-out;
+      }
+      .contact:hover,
+      .about:hover {
+        background-color: #bb5008;
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        /* overflow-x: hidden; */
+        font-family: "Lexend", sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+      }
+      .svg {
+        position: relative;
+        left: 3vw;
+      }
+      /* Responsive navbar styles */
+
+      @media only screen and (max-width: 500px) {
+        .nav-logo {
+          font-size: 1.4rem;
+          position: relative;
+          bottom: 30px;
+        }
+        #navy {
+          margin-left: 35vw;
+        }
+        #navy-ul {
+          border-radius: 0.5rem 0px 0px 1.5rem;
+          padding-top: 1.5rem;
+        }
+        .slider-ul {
+          border-radius: 0.5rem 0px 0px 1.5rem;
+          margin-left: -25vw !important;
+          padding-top: 1em;
+        }
+      }
+      @media only screen and (max-width: 768px) {
+        .logo {
+          font-size: 1.5rem;
+        }
+        .extras nav ul {
+          gap: 1rem;
+          margin-left: 0;
+        }
+      }
+      @media only screen and (min-width: 300px) {
+        .target {
+          display: flex;
+          flex-direction: row-reverse;
+        }
+      }
+      .slider-navbar {
+        position: relative;
+        right: 0px;
+        margin-left: 85vw;
+        margin-top: 75px;
+        padding-left: 65%;
+        transition: all 1s ease-in-out 0s;
+      }
+      .slider-ul {
+        display: flex;
+        background-color: #ffad4f;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-direction: column;
+        padding: 0vw 0vw 5vh 11vw;
+        font-size: 20px;
+        border-radius: 0.5rem 0px 0px 1.5rem;
+        padding-top: 1em;
+        position: relative;
+        left: 100vw;
+        transition: all 0.5s ease-in-out; /* Smooth transition */
+      }
+      .slider-li {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        right: 14%;
+      }
+      .line {
+        width: 50%;
+        border: 0.1px solid black;
+        height: 0.1px;
+      }
+      #navy {
+        margin-left: 15vw;
+      }
+      #navy-ul {
+        border-radius: 0.5rem 0px 0px 1.5rem;
+        left: 10px;
+        padding-top: 1em;
+      }
+      .no-svg {
+        display: none;
+      }
+      .row-reverse {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+      .commony{
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <!-- Navbar (unchanged) -->
+    <div class="navbar">
+      <div class="nav-div">
+        <h1 class="logo">Clean Choice</h1>
+        <div class="extras">
+          <nav>
+            <ul class="nav-ul">
+              <li><a class="contact Home commony" href="./contact.html">Home</a></li>
+              <li><a class="about commony" href="./about.html">About</a></li>
+              <li><a class="contact contact0 commony" href="./contact.html">Contact</a></li>
+              <li>
+                <a class="contact service commony" href="./contact.html"> Services </a>
+              </li>
+              <li>
+                <a href="./login.html" class="sign-a">
+                  <div class="sign commony">Sign up/Log in</div>
+                </a>
+              </li>
+              <div class="target">
+                <li>
+                  <svg
+                    width="35px"
+                    height="35px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="svg"
+                  >
+                    <path
+                      d="M4 6H20M4 12H20M4 18H20"
+                      stroke="#000000"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </li>
+              </div>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div class="slider-navbar">
+      <ul class="slider-ul">
+        <li class="slider-li">
+          <a class="contact Home" href="./contact.html">Home</a>
+        </li>
+        <div class="line"></div>
+        <li class="slider-li li-3">
+          <a class="about" href="./about.html">About</a>
+        </li>
+        <div class="line"></div>
+        <li class="slider-li">
+          <a class="contact" href="./contact.html">Contact</a>
+        </li>
+        <div class="line"></div>
+        <li class="slider-li li-4">
+          <a class="contact service" href="./contact.html"> Services </a>
+        </li>
+        <div class="line"></div>
+        <li class="slider-li li-4">Sign in</li>
+      </ul>
+    </div>
+    <script src="nav-test.js"></script>
+  </body>
+</html>

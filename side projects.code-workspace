@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"name": "side projects",
+			"path": "../../side projects"
+		},
+		{
+			"name": "static",
+			"path": ".."
+		},
+		{
+			"path": "../../REACT"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "side projects"
+	}
+}

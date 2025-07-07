@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Clean Choice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=DM+Serif+Text:ital@0;1&family=Lexend:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="login-form">
+      <form id="login-form">
+        <div class="email">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" required />
+        </div>
+        <div class="password">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" required />
+        </div>
+        <div class="submit">
+          <div id="error-message"></div>
+          <input class="submit-button" type="submit" value="Login" />
+          <a href="/register" class="register-button-div">
+            Aren't a member yet?
+          </a>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("login-form");
+      const errorDiv = document.getElementById("error-message");
+      errorDiv.style.display = "none"; // Hide error message by default
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault(); // stop normal form submit
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+          const res = await fetch("/submit-login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            window.location.href = data.redirect; // Use redirect from server response
+          } else {
+            throw new Error(data.message || "Login failed.");
+          }
+        } catch (err) {
+          errorDiv.innerText = err.message;
+          errorDiv.style.display = "flex";
+        }
+      });
+    </script>
+  </body>
+</html>

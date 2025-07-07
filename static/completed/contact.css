@@ -1,0 +1,233 @@
+/* Reset and basic styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Lexend", sans-serif;
+  background-color: #f4f4f4;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Navbar (unchanged) */
+.extras nav ul li {
+  list-style: none;
+}
+
+.nav-ul {
+  display: flex;
+  gap: 2rem;
+  margin-left: -13rem;
+}
+
+.nav-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95vw;
+}
+.navbar {
+  font-family: "Comfortaa", sans-serif;
+  max-width: 100%;
+  position: sticky;
+  z-index: 10;
+  background-color: #ffad4f;
+  padding: 1vw;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 200px;
+  margin-bottom: -100px;
+}
+a {
+  text-decoration-line: none;
+  color: black;
+}
+
+.sign {
+  background-color: #bb5008;
+  border-radius: 1rem;
+  padding: 10px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+.sign:hover {
+  /* background-color: #BB5008; */
+  /* border: rgb(0, 0, 0, 0); */
+  padding: 1vw;
+}
+ul {
+  display: flex;
+  gap: 2rem;
+  margin-left: -13rem;
+}
+li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact,
+.about {
+  transition: padding 0.2s ease-in-out;
+}
+.contact:hover,
+.about:hover {
+  background-color: #bb5008;
+  padding: 0.5vw;
+  border-radius: 0.5vw;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  margin-top: 70px; /* Space for fixed navbar */
+}
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  color: #fff;
+}
+.hero-overlay h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-family: "DM Serif Text", serif;
+}
+.hero-overlay p {
+  font-size: 1.2rem;
+}
+
+/* Main Content */
+.content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.section {
+  background-color: #fff;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.section h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+.section p {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+/* Contact Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+.form-group input,
+.form-group textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+.btn {
+  align-self: flex-start;
+  background-color: #ffad4f;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: #bb5008;
+}
+
+/* Footer */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1.5rem 1rem;
+}
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  margin: 1rem auto 0; /* override the negative margin */
+}
+.footer-nav a {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+.footer-nav a:hover {
+  color: #ffad4f;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+  .section {
+    padding: 1rem;
+  }
+  .footer-nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    right: 2.5vw;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .nav-logo {
+    font-size: 1.4rem;
+  }
+
+}
+.navbar {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+}

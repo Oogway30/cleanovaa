@@ -1,0 +1,213 @@
+/* body {
+  font-family: "Poppins",sans-serif;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8rem;
+  background: rgb(204,230,253);
+background: linear-gradient(90deg, rgb(255, 188, 4) 0%, rgb(255, 196, 2) 43%, rgb(182, 134, 1) 84%, rgb(155, 90, 6) 100%);
+}
+
+.login-form {
+  padding: 5rem;
+  border-radius: 2rem;
+  display: flex;
+  background-color: #ffad4f;
+}
+@media only screen and (max-width: 500px) {
+  body {
+    padding-top: 4rem;
+  }
+
+  .login-form {
+    width: 80vw;
+  }
+}
+@media only screen and (max-width: 1500px) {
+  .login-form {
+    padding: 5rem;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.password,
+.submit {
+  margin-top: 1rem;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+.submit-button {
+  font-family: "Poppins",sans-serif;
+}
+
+label {
+  display: block;
+}
+
+.radio-buttons {
+  display: flex;
+  gap: 6rem;
+} 
+
+
+input{
+  width: 100%;
+  transform: scale(1.2);
+  border-radius: 0.2rem;
+  border: none;
+  font-family: 'Poppins',sans-serif;
+}
+
+input:hover, input:focus{
+  color: rgb(255, 255, 255);
+  background-color: #E47513;
+  transition: all 0.7s ease-in-out 0.4s;
+  border: none;
+}
+
+.register-button-div{
+  background-color: #ffad4f;
+  color:#E47513;
+  width: 100%;
+  transform: scale(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.2rem;
+}
+ */
+/*----------------------------------
+   Global & Body Styles
+----------------------------------*/
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: white;
+}
+
+/*----------------------------------
+   Login Form Container
+----------------------------------*/
+.login-form {
+  background-color: #fff;
+  padding: 3rem 4rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px #e47513;
+  max-width: 400px;
+  width: 90%;
+  border: 1px solid #e47513;
+}
+
+/*----------------------------------
+   Form & Input Styles
+----------------------------------*/
+.login-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form label {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus,
+.login-form input[type="email"]:hover,
+.login-form input[type="password"]:hover {
+  border-color: #e47513;
+  background-color: #fff7f2;
+  outline: none;
+  font-family: "Lexend", sans-serif;
+  font-size: 15px;
+}
+
+/*----------------------------------
+   Submit Button & Register Link
+----------------------------------*/
+.submit {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #e47513;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #e47513;
+}
+
+.register-button-div {
+  display: block;
+  text-align: center;
+  padding: 0.8rem;
+  border: 1px solid #e47513;
+  border-radius: 0.5rem;
+  color: #e47513;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+  text-decoration: none;
+}
+
+.register-button-div:hover {
+  background-color: #e47513;
+  color: #fff;
+}
+
+/*----------------------------------
+   Responsive Styles
+----------------------------------*/
+@media only screen and (max-width: 500px) {
+  .login-form {
+    padding: 2rem;
+    width: 90%;
+  }
+}
+#error-message {
+  color:#de3f00;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  border: 2px solid #de3f00;
+  border-radius: 10px;
+}

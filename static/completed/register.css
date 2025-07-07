@@ -1,0 +1,153 @@
+/* Global Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;overflow-x:hidden;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: linear-gradient(
+    90deg,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 43%,
+    rgb(255, 255, 255) 84%,
+    rgb(255, 255, 255) 100%
+  );
+}
+
+/* Registration Form Container */
+.register-form {
+  background-color: #fff;
+  padding: 3rem 4rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+}
+
+/* Form Layout */
+.register-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form div {
+  margin-bottom: 1.5rem;
+}
+
+.register-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Input Fields styled like the login page */
+.register-form input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  transition: border 0.3s ease, background-color 0.3s ease;
+  font-family: "Lexend",sans-serif;
+  font-size: 15px;
+}
+
+.register-form input:focus,
+.register-form input:hover {
+  border-color: #e47513;
+  background-color: #fff7f2;
+  outline: none;
+  color: #333;
+}
+
+/* Radio Buttons */
+.radio-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.radio-buttons label {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Submit Section */
+.submit {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #e47513;
+  color: #fff;
+  border: none;
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #cf680f;
+}
+
+.login-button-div {
+  display: block;
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid #e47513;
+  border-radius: 0.3rem;
+  color: #e47513;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+}
+
+.login-button-div:hover {
+  background-color: #e47513;
+  color: #fff;
+}
+input[type="radio"] {
+  accent-color: #e47513;
+}
+
+@media only screen and (max-width: 500px) {
+  .register-form {
+    padding: 2rem;
+    border: none !important;
+  }
+  .submit-button,
+  .login-button-div {
+    font-size: 1rem;
+  }
+}
+.radio-buttons {
+  gap: 12rem;
+}
+.gender-male,
+.gender-female {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.register-form {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.95
+  ); /* Slightly translucent off-white */
+  padding: 3rem 4rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15); /* Stronger shadow for depth */
+  border: 1px solid #cf680f; /* Light border to further delineate the form */
+  max-width: 400px;
+  width: 90%;
+}

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management</title>
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
+      }
+
+      header {
+        background-color: #ffad4f;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin-top: 20px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-container {
+        text-align: right;
+        margin-bottom: 15px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        max-width: 300px;
+        padding: 10px;
+        border: 2px solid #ffad4f;
+        border-radius: 6px;
+        outline: none;
+        font-size: 16px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #ffad4f;
+        color: white;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #ffe0b3;
+        transition: 0.3s;
+      }
+
+      .action-btn {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 2px;
+      }
+
+      .update-btn {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .delete-btn {
+        background-color: #f44336;
+        color: white;
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px;
+        margin-top: 20px;
+        background-color: #ffad4f;
+        color: white;
+        width: 100vw;
+        font-size:18px;
+        position: relative;
+        bottom: 0;
+      }
+
+      /* Dropdown Styles */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 120px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      .dropdown-content button {
+        background: none;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .dropdown-content button:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>User Management</header>
+    <div class="container">
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Search users..." />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Number</th>
+            <th>Gender</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="user-table">
+          <!-- Data will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+    <footer>&copy; 2025 User Management System</footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("http://localhost:3000/api/users")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Error: ${response.status} - ${response.statusText}`
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (!Array.isArray(data) || data.length === 0) {
+              console.warn("No users found.");
+              return;
+            }
+
+            const tableBody = document.getElementById("user-table");
+            tableBody.innerHTML = "";
+
+            data.forEach((user) => {
+              const row = document.createElement("tr");
+              row.innerHTML = `
+                            <td>${user.id}</td>
+                            <td>${user.email}</td>
+                            <td>${user.number}</td>
+                            <td>${user.gender}</td>
+                            <td>${user.name}</td>
+                            <td>${user.role}</td>
+                            <td>
+                                <button class="action-btn update-btn" onclick="updateUser(${user.id}, '${user.email}', '${user.number}', '${user.gender}', '${user.name}', '${user.role}')">Update</button>
+                                <div class="dropdown">
+                                  <button class="action-btn delete-btn">Delete ▼</button>
+                                  <div class="dropdown-content">
+                                    <button onclick="softDeleteUser(${user.id}, this)">Soft Delete</button>
+                                    <button onclick="hardDeleteUser(${user.id}, this)">Hard Delete</button>
+                                  </div>
+                                </div>
+                            </td>
+                        `;
+              tableBody.appendChild(row);
+            });
+          })
+          .catch((error) => console.error("Error fetching data:", error));
+      });
+
+      // Search functionality for filtering rows based on input
+      document.getElementById("search").addEventListener("input", function () {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#user-table tr");
+
+        rows.forEach((row) => {
+          let text = row.innerText.toLowerCase();
+          row.style.display = text.includes(filter) ? "" : "none";
+        });
+      });
+
+      // Soft Delete: just remove the row visually
+      function softDeleteUser(userId, btn) {
+        const row = btn.closest("tr");
+        row.remove();
+        console.log(`Soft deleted user ${userId}`);
+      }
+
+      // Hard Delete: send DELETE request to backend 
+      function hardDeleteUser(userId, btn) {
+        fetch(`http://localhost:3000/api/users/${userId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Password": "ILOVEPANCAKES", // Optional if your API uses auth
+          },
+        })
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Failed to delete user");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data.message || "User deleted");
+            const row = btn.closest("tr");
+            row.remove(); // Remove row from UI
+          })
+          .catch((err) => console.error("Hard delete error:", err));
+      }
+
+      // Update User: Change row to input fields
+      function updateUser(userId, email, number, gender, name, role) {
+        const row = document.querySelector(`tr td:first-child`).parentElement;
+        const cells = row.querySelectorAll("td");
+
+        cells[1].innerHTML = `<input type="text" value="${email}">`;
+        cells[2].innerHTML = `<input type="text" value="${number}">`;
+        cells[3].innerHTML = `<input type="text" value="${gender}">`;
+        cells[4].innerHTML = `<input type="text" value="${name}">`;
+        cells[5].innerHTML = `<input type="text" value="${role}">`;
+
+        const updateBtn = row.querySelector(".update-btn");
+        updateBtn.innerText = "Save";
+        updateBtn.setAttribute("onclick", `saveUser(${userId})`);
+      }
+
+      // Save User: Save updated user details
+      function saveUser(userId) {
+        const row = document.querySelector(`tr td:first-child`).parentElement;
+        const cells = row.querySelectorAll("td");
+
+        const updatedEmail = cells[1].querySelector("input").value;
+        const updatedNumber = cells[2].querySelector("input").value;
+        const updatedGender = cells[3].querySelector("input").value;
+        const updatedName = cells[4].querySelector("input").value;
+        const updatedRole = cells[5].querySelector("input").value;
+        fetch(`http://localhost:3000/api/users/${userId}/${updatedEmail}/${updatedNumber}/${updatedGender}/${updatedName}/${updatedRole}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Password": "ILOVEPANCAKES", 
+          },
+        })
+        console.log(`Saving updated user ${userId}:`, {
+          updatedEmail,
+          updatedNumber,
+          updatedGender,
+          updatedName,
+          updatedRole,
+        });
+
+        cells[1].innerHTML = updatedEmail;
+        cells[2].innerHTML = updatedNumber;
+        cells[3].innerHTML = updatedGender;
+        cells[4].innerHTML = updatedName;
+        cells[5].innerHTML = updatedRole;
+
+        const updateBtn = row.querySelector(".update-btn");
+        updateBtn.innerText = "Update";
+        updateBtn.setAttribute(
+          "onclick",
+          `updateUser(${userId}, '${updatedEmail}', '${updatedNumber}', '${updatedGender}', '${updatedName}', '${updatedRole}')`
+        );
+      }
+    </script>
+  </body>
+</html>

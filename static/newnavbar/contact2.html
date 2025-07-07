@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Clean Choice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=DM+Serif+Text:ital@0;1&family=Lexend:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Reset and basic styling */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Lexend", sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+      }
+
+      /* Main Navbar */
+      .navbar {
+        font-family: "Comfortaa", sans-serif;
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        background-color: #ffad4f;
+        padding: 2vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-div {
+        width: 95vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-ul {
+        display: flex;
+        gap: 2rem;
+      }
+      .nav-ul li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      .contact,
+      .about {
+        transition: padding 0.2s ease-in-out;
+      }
+      .contact:hover,
+      .about:hover {
+        background-color: #bb5008;
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+      }
+      .sign {
+        background-color: #bb5008;
+        border-radius: 1rem;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+      }
+      .sign:hover {
+        padding: 1vw;
+      }
+      /* .navbar::after {
+        content: "";
+        display: block;
+        height: 72px;
+      } */
+
+      .slider-navbar {
+        position: fixed;
+        top: 72px;
+        right: 0;
+        width: 250px;
+        background-color: #ffad4f;
+        transition: transform 1s ease-in-out;
+        z-index: 110;
+        border-radius: 2rem 0rem 0.5rem 3rem;
+        transform: translateX(250px);
+      }
+
+      .slider-navbar.active {
+        transform: translateX(0);
+      }
+
+      .slider-ul {
+        list-style: none;
+        margin: 0;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .slider-ul li {
+        text-align: center;
+      }
+      .slider-ul a {
+        font-size: 20px;
+        color: black;
+      }
+      .svg {
+        cursor: pointer;
+      }
+      .no-svg {
+        display: none;
+      }
+
+      @media only screen and (max-width: 768px) {
+        .logo {
+          font-size: 1.5rem;
+        }
+        .nav-ul {
+          gap: 1rem;
+        }
+      }
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+      ul {
+        display: flex;
+        gap: 2rem;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .contact,
+      .about {
+        transition: padding 0.2s ease-in-out;
+      }
+      .contact:hover,
+      .about:hover {
+        background-color: #bb5008;
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        overflow-x: hidden;
+        font-family: "Lexend", sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+      }
+      /* Hero Section */
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 70vh;
+        overflow: hidden;
+      }
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.4);
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        color: #fff;
+      }
+      .hero-overlay h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        font-family: "DM Serif Text", serif;
+      }
+      .hero-overlay p {
+        font-size: 1.2rem;
+      }
+
+      /* Main Content */
+      .content {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .section {
+        background-color: #fff;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .section h2 {
+        margin-bottom: 1rem;
+        color: #333;
+      }
+      .section p {
+        margin-bottom: 1rem;
+        color: #555;
+      }
+
+      /* Contact Form Styles */
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .form-group label {
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #333;
+      }
+      .form-group input,
+      .form-group textarea {
+        padding: 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+      }
+      .btn {
+        align-self: flex-start;
+        background-color: #ffad4f;
+        color: #fff;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #bb5008;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 1.5rem 1rem;
+      }
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .footer-nav ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        margin: 1rem auto 0; /* override the negative margin */
+      }
+      .footer-nav a {
+        color: #fff;
+        transition: color 0.3s ease;
+      }
+      .footer-nav a:hover {
+        color: #ffad4f;
+      }
+
+      /* Responsive Styles */
+      @media only screen and (max-width: 768px) {
+        .hero-overlay h1 {
+          font-size: 2rem;
+        }
+        .hero-overlay p {
+          font-size: 1rem;
+        }
+        .section {
+          padding: 1rem;
+        }
+        .footer-nav ul {
+          flex-direction: column;
+          gap: 0.5rem;
+          position: relative;
+          right: 2.5vw;
+        }
+      }
+      @media only screen and (max-width: 500px) {
+        .nav-logo {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="nav-div">
+        <h1 class="logo">Clean Choice</h1>
+        <div class="extras">
+          <nav>
+            <ul class="nav-ul">
+              <li><a class="contact Home" href="./homepage2.html">Home</a></li>
+              <li><a class="about" href="./about2.html">About</a></li>
+              <li>
+                <a class="contact contact0" href="./contact2.html">Contact</a>
+              </li>
+              <li>
+                <a class="contact service" href="./services2.html">Services</a>
+              </li>
+              <li>
+                <a href="../completed/login.html" class="sign-a">
+                  <div class="sign">Sign up/Log in</div>
+                </a>
+              </li>
+              <li>
+                <svg
+                  class="svg"
+                  width="35px"
+                  height="35px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 6H20M4 12H20M4 18H20"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider Navbar (Mobile Menu) -->
+    <div class="slider-navbar" id="sliderNavbar">
+      <ul class="slider-ul">
+        <li><a class="contact Home" href="./homepage2.html">Home</a></li>
+        <div class="line"></div>
+        <li><a class="about" href="./about2.html">About</a></li>
+        <div class="line"></div>
+        <li><a class="contact" href="./contact2.html">Contact</a></li>
+        <div class="line"></div>
+        <li><a class="contact service" href="./services2.html">Services</a></li>
+        <div class="line"></div>
+        <li><a href="../completed/login.html">Sign in</a></li>
+      </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <img
+        src="../images/about-image.jpg"
+        alt="Contact Us"
+        class="hero-image"
+      />
+      <div class="hero-overlay">
+        <h1>Get in Touch</h1>
+        <p>We’re here to help you every step of the way</p>
+      </div>
+    </header>
+
+    <!-- Main Contact Section -->
+    <main class="content">
+      <section id="contact-form" class="section">
+        <h2>Contact Us</h2>
+        <p>
+          Please fill out the form below and one of our representatives will get
+          back to you as soon as possible.
+        </p>
+        <form action="#" method="post" class="form">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your full name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Your email address"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Subject"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              placeholder="Your message here"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer --> 
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2025 Clean Choice. All rights reserved.</p>
+        <nav class="footer-nav">
+          <ul>
+            <li><a href="./homepage2.html">Home</a></li>
+            <li><a href="./about2.html">About</a></li>
+            <li><a href="./contact2.html">Contact</a></li>
+            <li><a href="./services2.html">Services</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      const svg = document.querySelector(".svg");
+      const sliderNavbar = document.getElementById("sliderNavbar");
+
+      svg.addEventListener("click", () => {
+        sliderNavbar.classList.toggle("active");
+      });
+
+      if (screen.width <= 500) {
+        document
+          .querySelectorAll(".nav-ul li:not(:last-child)")
+          .forEach((el) => {
+            el.style.display = "none";
+          });
+      } else {
+        document.querySelector(".svg").classList.add("no-svg");
+      }
+    </script>
+  </body>
+</html>

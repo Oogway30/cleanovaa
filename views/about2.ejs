@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | Cleanovaa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=DM+Serif+Text:ital@0;1&family=Lexend:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Lexend", sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+      }
+
+      /* Main Navbar */
+      .navbar {
+        font-family: "Comfortaa", sans-serif;
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        background-color: #ffad4f;
+        padding: 2vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-div {
+        width: 95vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-ul {
+        display: flex;
+        gap: 2rem;
+      }
+      .nav-ul li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      .contact,
+      .about {
+        transition: padding 0.2s ease-in-out;
+      }
+      .contact:hover,
+      .about:hover {
+        background-color: #bb5008;
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+      }
+      .sign {
+        background-color: #bb5008;
+        border-radius: 1rem;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+      }
+      .sign:hover {
+        padding: 1vw;
+      }
+      /* .navbar::after {
+        content: "";
+        display: block;
+        height: 72px;
+      } */
+
+      .slider-navbar {
+        position: fixed;
+        top: 72px;
+        right: 0;
+        width: 250px;
+        background-color: #ffad4f;
+        transition: transform 1s ease-in-out;
+        z-index: 110;
+        border-radius: 2rem 0rem 0.5rem 3rem;
+        transform: translateX(250px);
+      }
+
+      .slider-navbar.active {
+        transform: translateX(0);
+      }
+
+      .slider-ul {
+        list-style: none;
+        margin: 0;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .slider-ul li {
+        text-align: center;
+      }
+      .slider-ul a {
+        font-size: 20px;
+        color: black;
+      }
+      .svg {
+        cursor: pointer;
+      }
+      .no-svg {
+        display: none;
+      }
+
+      @media only screen and (max-width: 768px) {
+        .logo {
+          font-size: 1.5rem;
+        }
+        .nav-ul {
+          gap: 1rem;
+        }
+      }
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+      ul {
+        display: flex;
+        gap: 2rem;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .contact,
+      .about {
+        transition: padding 0.2s ease-in-out;
+      }
+      .contact:hover,
+      .about:hover {
+        background-color: #bb5008;
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        overflow-x: hidden;
+        font-family: "Lexend", sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+      }
+
+      /* (Navbar styles removed) */
+
+      /* General list styling for other lists, if needed */
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        overflow: hidden;
+        /* margin-top: 70px;  */
+      }
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.4);
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        color: #fff;
+      }
+      .logo {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        font-family: "Comfortaa", serif;
+      }
+      .hero-overlay p {
+        font-size: 1.2rem;
+      }
+
+      /* Main Content */
+      .content {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .section {
+        background-color: #fff;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .section h2 {
+        margin-bottom: 1rem;
+        color: #333;
+      }
+      .section p {
+        margin-bottom: 1rem;
+        color: #555;
+      }
+      .section ul {
+        list-style: disc inside;
+        margin-left: 1rem;
+      }
+      .section ul li {
+        margin-bottom: 0.5rem;
+        color: #555;
+      }
+
+      /* Call to Action */
+      .cta {
+        text-align: center;
+        background-color: #ffad4f;
+        color: #fff;
+      }
+      .cta .btn {
+        display: inline-block;
+        margin-top: 1rem;
+        background-color: #bb5008;
+        color: #fff;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      .cta .btn:hover {
+        background-color: #a03e07;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 1.5rem 1rem;
+        text-align: center;
+      }
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .footer-nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 1rem auto 0; /* override the negative margin from global ul styles */
+      }
+      .footer-nav a {
+        color: #fff;
+        transition: color 0.3s ease;
+      }
+      .footer-nav a:hover {
+        color: #ffad4f;
+      }
+
+      /* Responsive Styles */
+      @media only screen and (max-width: 768px) {
+        .logo {
+          font-size: 1.5rem;
+          position: relative;
+          top: 6px;
+        }
+        .hero-overlay p {
+          font-size: 1rem;
+        }
+        .section {
+          padding: 1rem;
+        }
+        .footer-nav ul {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+      @media only screen and (max-width: 500px) {
+      }
+
+      strong {
+        margin-right: 1vw;
+      }
+      p {
+        font-family: "Lexend", sans-serif;
+      }
+      .ul-1 {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="nav-div">
+        <h1 class="logo">Cleanovaa</h1>
+        <div class="extras">
+          <nav>
+            <ul class="nav-ul">
+              <% if (user) { %>
+              <li><a class="contact" href="/homepage-logged">Home</a></li>
+              <% } else { %>
+              <li><a class="contact" href="/homepage">Home</a></li>
+
+              <% } %>
+              <li><a class="about" href="/about">About</a></li>
+              <li><a class="contact" href="/contact">Contact</a></li>
+              <li><a class="contact service" href="/services">Services</a></li>
+              <li><a class="contact service" href="/booking">Booking</a></li>
+              <% if (user) { %>
+              <li><a class="sign" href="/logout">Logout</a></li>
+              <% } else { %>
+              <li>
+                <a href="/login" class="sign">
+                  <div class="sign">Sign up/Log in</div>
+                </a>
+              </li>
+              <% } %>
+              <li>
+                <svg
+                  class="svg"
+                  width="35px"
+                  height="35px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 6H20M4 12H20M4 18H20"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider Navbar (Mobile Menu) -->
+    <div class="slider-navbar" id="sliderNavbar">
+      <ul class="slider-ul">
+        <% if (user) { %>
+        <li><a class="contact" href="/homepage-logged">Home</a></li>
+        <% } else { %>
+        <li><a class="contact" href="/homepage">Home</a></li>
+        <% } %>
+        <div class="line"></div>
+        <li><a class="about" href="/about">About</a></li>
+        <div class="line"></div>
+        <li><a class="contact" href="/contact">Contact</a></li>
+        <div class="line"></div>
+        <li><a class="contact service" href="/services">Services</a></li>
+        <div class="line"></div>
+        <li><a class="contact service" href="/booking">Booking</a></li>
+        <div class="line"></div>
+        <% if (user) { %>
+        <li><a class="sign" href="/logout">Logout</a></li>
+        <% } else { %>
+        <li>
+          <a href="/login" class="sign">
+            Sign in
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <img
+        src="/images/about-image.jpg"
+        alt="Cleanovaa"
+        class="hero-image"
+      />
+      <div class="hero-overlay">
+        <h1>Welcome to Cleanovaa</h1>
+        <p>Transforming your spaces for over 7 years</p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content">
+      <section id="our-story" class="section">
+        <h2>Our Story</h2>
+        <p>
+          Founded seven years ago, Cleanovaa was born out of a simple idea:
+          everyone deserves a clean, healthy space without the hassle of doing
+          it themselves. Over the years, we’ve grown from a small local service
+          into a reputable cleaning company, consistently refining our
+          techniques and building lasting relationships with our clients.
+        </p>
+      </section>
+
+      <section id="our-mission" class="section">
+        <h2>Our Mission</h2>
+        <p>
+          Our mission is straightforward yet powerful: to clean every space as
+          thoroughly as possible. We believe that a truly clean environment has
+          the power to uplift moods, boost productivity, and enhance overall
+          well-being.
+        </p>
+      </section>
+
+      <!-- Call to Action -->
+      <section id="cta" class="section cta">
+        <h2>Ready for a Fresh Start?</h2>
+        <p>
+          Let Cleanovaa handle the cleaning while you enjoy a spotless space.
+          Contact us today to schedule your consultation!
+        </p>
+        <a href="/contact" class="btn">Contact Us</a>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2025 Cleanovaa. All rights reserved.</p>
+        <nav class="footer-nav">
+          <ul>
+            <% if (user) { %>
+            <li style="list-style: none">
+              <a href="/homepage-logged">Home</a>
+            </li>
+            <% } else { %>
+            <li style="list-style: none"><a href="/homepage">Home</a></li>
+            <% } %>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/booking">Booking</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const svg = document.querySelector(".svg");
+        const sliderNavbar = document.getElementById("sliderNavbar");
+
+        if (svg && sliderNavbar) {
+          svg.addEventListener("click", (e) => {
+            e.stopPropagation();
+            sliderNavbar.classList.toggle("active");
+          });
+
+          document.addEventListener("click", (e) => {
+            if (!svg.contains(e.target) && !sliderNavbar.contains(e.target)) {
+              sliderNavbar.classList.remove("active");
+            }
+          });
+        }
+
+        if (screen.width <= 500) {
+          document
+            .querySelectorAll(".nav-ul li:not(:last-child)")
+            .forEach((el) => {
+              el.style.display = "none";
+            });
+        } else {
+          svg?.classList.add("no-svg");
+        }
+      });
+    </script>
+  </body>
+</html>

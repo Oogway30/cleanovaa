@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Clean Choice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="register.css" />
+  </head>
+  <body>
+    <div class="register-form">
+      <form action="/submit-register" method="POST">
+        <div class="email">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" required />
+        </div>
+        <div class="password">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" required />
+        </div>
+        <div class="Name">
+          <label for="address">User Name</label>
+          <input id="address" type="text" name="name" required />
+        </div>
+        <div class="Phone Number">
+          <label for="number">Phone Number</label>
+          <input id="number" type="tel" name="number" required />
+        </div>
+        <div class="radio-buttons">
+          <div class="gender-male">
+            <label for="gender-male">Male</label>
+            <input id="gender-male" type="radio" value="male" name="gender" required />
+          </div>
+          <div class="gender-female">
+            <label for="gender-female">Female</label>
+            <input id="gender-female" type="radio" value="female" name="gender" required />
+          </div>
+        </div>
+        <div class="submit">
+          <input class="submit-button" type="submit" value="Register" />
+          <a href="./login.html" class="login-button-div">Already a member?</a>
+        </div>
+      </form>
+    </div>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const passwordInput = document.querySelector("input[name='password']");
+  const form = document.querySelector("form");
+
+  // Create the checklist with default list style
+  const checklist = document.createElement("ul");
+  checklist.style.margin = "10px 0 0 0";
+  checklist.style.display = "none";
+  checklist.innerHTML = `
+    <li id="pw-length" style="color: red;">At least 8 characters</li>
+    <li id="pw-upper" style="color: red;">At least one uppercase letter</li>
+    <li id="pw-lower" style="color: red;">At least one lowercase letter</li>
+    <li id="pw-number" style="color: red;">At least one number</li>
+    <li id="pw-special" style="color: red;">At least one special character</li>
+  `;
+  passwordInput.parentNode.appendChild(checklist);
+
+  // Show checklist on focus
+  passwordInput.addEventListener("focus", function() {
+    checklist.style.display = "block";
+  });
+
+  // Hide checklist on blur (optional)
+  passwordInput.addEventListener("blur", function() {
+    checklist.style.display = "none";
+  });
+
+  passwordInput.addEventListener("input", function() {
+    const val = passwordInput.value;
+    const checks = [
+      { id: "pw-length", valid: val.length >= 8 },
+      { id: "pw-upper", valid: /[A-Z]/.test(val) },
+      { id: "pw-lower", valid: /[a-z]/.test(val) },
+      { id: "pw-number", valid: /\d/.test(val) },
+      { id: "pw-special", valid: /[\W_]/.test(val) }
+    ];
+    checks.forEach(check => {
+      const el = document.getElementById(check.id);
+      el.style.color = check.valid ? "green" : "red";
+    });
+  });
+
+  form.addEventListener("submit", function(e) {
+    const val = passwordInput.value;
+    if (
+      val.length < 8 ||
+      !/[A-Z]/.test(val) ||
+      !/[a-z]/.test(val) ||
+      !/\d/.test(val) ||
+      !/[\W_]/.test(val)
+    ) {
+      e.preventDefault();
+      checklist.style.display = "block";
+      passwordInput.focus();
+    }
+  });
+});
+</script>
+  </body>
+</html>
