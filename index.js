@@ -683,4 +683,6 @@ app.get("/resend-code", (req, res) => {
 // =======================
 // Server
 // =======================
-export const handler = serverless(app);
+app.listen(process.env.PORT,()=>{
+  console.log("Port:",process.env.PORT)
+})
